@@ -11,6 +11,9 @@ const generateRandomArray = n =>
 
 const constArray = [2, 56, 23, 88, 17, 4];
 
+const constArray1 = [2, 5, 8, 10];
+const squareRoot = arr => arr.map(x => Math.sqrt(x).toFixed(3));
+
 const MyApp = () => (
   <div>
     <AppTitle />
@@ -18,6 +21,7 @@ const MyApp = () => (
     <section> {generateArray(5).toString()} </section>
     <section> {generateRandomArray(5).toString()} </section>
     <section> {constArray.filter(x => x > 15).toString()}</section>
+    <section> {squareRoot(constArray1).join(", ")}</section>
   </div>
 );
 
