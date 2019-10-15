@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import React from "react";
 
-const generateArray = (a = 1, b = 1) => {
-  return Array.from(new Array(b - a + 1), (x, i) => a + i);
-};
+const generateArray2 = (a = 1, b = 1) =>
+  Array.from(new Array(b - a + 1), (x, i) => a + i);
+const squareRoot = arr => arr.map(x => Math.sqrt(x).toFixed(3));
 
 class Inputs extends React.Component {
   constructor() {
@@ -14,8 +14,10 @@ class Inputs extends React.Component {
 
     this.a = 0;
     this.b = 0;
+    this.wasArrayProcessed = false;
     this.renderCount = 1;
     this.changeValue = this.changeValue.bind(this);
+    this.processArray = this.processArray.bind(this);
 
     this.timerStart();
   }
@@ -52,9 +54,18 @@ class Inputs extends React.Component {
     console.log(`Value ${e.target.id} changed: ${e.target.value} `);
 
     if (this.b > this.a && this.a > 0) {
-      this.setState({ array: generateArray(this.a, this.b) });
+      this.wasArrayProcessed = false;
+      this.setState({ array: generateArray2(this.a, this.b) });
     } else if (this.state.array.length > 0) {
+      this.wasArrayProcessed = false;
       this.setState({ array: [] });
+    }
+  }
+
+  processArray() {
+    if (this.wasArrayProcessed === false) {
+      this.wasArrayProcessed = true;
+      this.setState(prevState => ({ array: squareRoot(prevState.array) }));
     }
   }
 
@@ -87,6 +98,13 @@ class Inputs extends React.Component {
           <span className="col-1 pr-0">[a, b]:</span>
           <span className="col-6 pl-0">{this.state.array.join(", ")}</span>
         </section>
+        <button
+          type="button"
+          className="btn btn-dark"
+          onClick={this.processArray}
+        >
+          Process array
+        </button>
       </div>
     );
   }
