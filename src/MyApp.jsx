@@ -1,6 +1,7 @@
 import React from "react";
 import AppTitle from "./AppTitle";
 import Students from "./Students";
+import Inputs from "./Inputs";
 
 const generateArray = n => Array.from(new Array(n), (x, i) => i + 1);
 
@@ -16,13 +17,21 @@ const squareRoot = arr => arr.map(x => Math.sqrt(x).toFixed(3));
 
 const MyApp = () => (
   <div>
-    <AppTitle />
-    <section> Lorem ipsum</section>
-    <section> {generateArray(5).toString()} </section>
-    <section> {generateRandomArray(5).toString()} </section>
-    <section> {constArray.filter(x => x > 15).toString()} </section>
-    <section> {squareRoot(constArray1).join(", ")} </section>
-    <Students />
+    <section className="container">
+      <h1>Lab 1</h1>
+      <AppTitle />
+      <section> Lorem ipsum</section>
+      <section> {generateArray(5).toString()} </section>
+      <section> {generateRandomArray(5).toString()} </section>
+      <section> {constArray.filter(x => x > 15).toString()} </section>
+      <section> {squareRoot(constArray1).join(", ")} </section>
+      <Students />
+    </section>
+
+    <section className="container">
+      <h1>Lab 2</h1>
+      <Inputs />
+    </section>
   </div>
 );
 
