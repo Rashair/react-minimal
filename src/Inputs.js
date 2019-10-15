@@ -8,25 +8,53 @@ const generateArray = (a = 1, b = 1) => {
 class Inputs extends React.Component {
   constructor() {
     super();
-    this.state = { a: 0, b: 0, array: [] };
+    this.state = {
+      array: []
+    };
 
+    this.a = 0;
+    this.b = 0;
+    this.renderCount = 1;
     this.changeValue = this.changeValue.bind(this);
+
+    this.timerStart();
+  }
+
+  componentDidMount() {
+    this.timerEnd();
+  }
+
+  shouldComponentUpdate() {
+    this.timerStart();
+    return true;
+  }
+
+  componentDidUpdate() {
+    this.timerEnd();
+  }
+
+  timerStart() {
+    console.time("render_time");
+  }
+
+  timerEnd() {
+    console.log(`render - ${this.renderCount} `);
+    console.timeEnd("render_time");
+    this.renderCount += 1;
   }
 
   changeValue(e) {
-    let valA = this.state.a;
-    let valB = this.state.b;
     if (e.target.id === "a") {
-      valA = Number(e.target.value);
+      this.a = Number(e.target.value);
     } else {
-      valB = Number(e.target.value);
+      this.b = Number(e.target.value);
     }
     console.log(`Value ${e.target.id} changed: ${e.target.value} `);
 
-    if (valB > valA && valA > 0) {
-      this.setState({ a: valA, b: valB, array: generateArray(valA, valB) });
-    } else {
-      this.setState({ a: valA, b: valB, array: [] });
+    if (this.b > this.a && this.a > 0) {
+      this.setState({ array: generateArray(this.a, this.b) });
+    } else if (this.state.array.length > 0) {
+      this.setState({ array: [] });
     }
   }
 
