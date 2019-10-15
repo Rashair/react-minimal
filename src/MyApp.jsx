@@ -17,7 +17,7 @@ const squareRoot = arr => arr.map(x => Math.sqrt(x).toFixed(3));
 
 const MyApp = () => (
   <div>
-    <section className="container">
+    <section className="container border border-darken-3">
       <h1>Lab 1</h1>
       <AppTitle />
       <section> Lorem ipsum</section>
@@ -28,7 +28,7 @@ const MyApp = () => (
       <Students />
     </section>
 
-    <section className="container">
+    <section className="container border border-darken-3 border-top-0 p-md-3">
       <h1>Lab 2</h1>
       <Inputs />
     </section>
